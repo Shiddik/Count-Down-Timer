@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sCountDown Core Javascript</title>
+</head>
+<body>
+    <div id="scountdown" style="display: flex; justify-content: center;">
+        <div>
+            <h1>Days</h1>
+            <span id="days">20</span>
+        </div>        
+        <div>
+            <h1>Hours</h1>
+            <span id="hours">17</span>
+        </div>       
+        <div>
+            <h1>Minutes</h1>
+            <span id="minutes">15</span>
+        </div>        
+        <div>
+            <h1>Seconds</h1>
+            <span id="seconds">15</span>
+        </div>
+    </div>
+    <script>
+        const dayDiv = document.getElementById("days"); //Get HTML Tag ID 
+        const hourDiv = document.getElementById("hours"); //Get HTML Tag ID 
+        const minuteDiv = document.getElementById("minutes"); //Get HTML Tag ID 
+        const secondDiv = document.getElementById("seconds"); //Get HTML Tag ID 
+
+        const targetDate = "1 jan 2021" // Set the date for counting down
+        function sCountDown() {
+            const countDownDate = new Date(targetDate);
+            const currentDate   = new Date();
+            const totalTime     = (countDownDate - currentDate)/1000; // Find the distance between now and the count down date
+            const days = Math.floor(totalTime / 3600/*3600 for 1 hour*/ / 24) // Total Days
+            const hours = Math.floor(totalTime / 3600) % 24 // Total Hours
+            const minutes = Math.floor(totalTime / 60) % 60 // Total Minutes
+            const seconds = Math.floor(totalTime) % 60 // Total Seconds
+
+            //Push The Data Into HTML Tag
+            dayDiv.innerHTML = days;
+            hourDiv.innerHTML = hours;
+            minuteDiv.innerHTML = minutes;
+            secondDiv.innerHTML = seconds;
+
+            // If the count down is over 
+            if (totalTime < 0) {
+                clearInterval();
+                document.getElementById("scountdown").innerHTML = "EXPIRED";
+            }
+        }
+        sCountDown();
+    </script>
+</body>
+</html>
